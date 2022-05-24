@@ -7,12 +7,19 @@ app.use(bodyPArser.json())
 const { users } = require('./state')
 
 /* BEGIN - create routes here */
+
+/**
+ * this route returns the list of users on state.js
+ */
 app.get("/users", function(req, res){
   console.log("GET /users")
   
   res.json(users)
 })
 
+/**
+ * this route returs the user base on the ID requested looping into users.
+ */
 app.get("/users/:id", function(req, res){
   console.log("/GET /users/", req.params.id)
   let found
@@ -33,6 +40,10 @@ app.get("/users/:id", function(req, res){
 
 })
 
+/**
+ * this route push a new object into users array in state.js
+ * making a empty object and pushing into users
+ */
 app.post("/users", function(req, res){
   console.log("POST /users");
   let json = req.body
@@ -48,6 +59,10 @@ app.post("/users", function(req, res){
 
 })
 
+/**
+ * this route get a id and update the content of the object that has the id required.
+ * if the object does not exist(id) send a error 404
+ */
 app.put("/users/:id", function(req, res){
   console.log("PUT /users/", req.params.id )
   let json = req.body
@@ -72,6 +87,10 @@ app.put("/users/:id", function(req, res){
   }
 })
 
+/**
+ * this route gets a ID and delete the object with the same ID
+ * send a response with the ID and DELETE the object from users at state.js
+ */
 app.delete("/users/:id", function(req, res){
   console.log("DELETE /users/", req.params.id)
   let index = -1
